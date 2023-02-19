@@ -3,7 +3,7 @@ import Link from "next/link";
 function MainNavigation() {
 
   return (
-    <header className="w-full h-20 flex items-center justify-between bg-[#bc5a45] p-2">
+    <header className="w-full h-40rem flex items-center justify-between bg-[#bc5a45] p-2">
       <div className="text-2xl font-bold">Event Management WebApp</div>
       <nav>
         <ul className="flex m-0 p-0 space-x-5 ml-2">

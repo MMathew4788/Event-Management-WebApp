@@ -1,33 +1,47 @@
+import { Fragment } from "react";
+import Head from "next/head";
+import { MongoClient } from 'mongodb';
+
 import EventList from "../components/Events/EventList";
 
-const Dummy_Event =[
-  {
-    id:"e1",
-    title: "1st Event",
-    image: "https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    address: "123 park, 123 street, city",
-    description: "this is the 1st event",
-  },
-  {
-    id:"e2",
-    title: "2nd Event",
-    image: "https://images.pexels.com/photos/1983046/pexels-photo-1983046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    address: "123 park, 123 street, city",
-    description: "this is the 2nd event",
-  },
-  {
-    id:"e3",
-    title: "3rd Event",
-    image: "https://images.pexels.com/photos/2263410/pexels-photo-2263410.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    address: "123 park, 123 street, city",
-    description: "this is the 3rd event",
-  }
-]
-
-function HomePage(){
+function HomePage(props){
   return(
-    <EventList events={Dummy_Event}/>
+    <Fragment>
+      <Head>
+      <title>Event Management WebApp</title>
+        <meta
+          name='description'
+          content='Browse through a list of events'
+        />
+      </Head>
+    <EventList events={props.events}/>
+    </Fragment>
   )
 }
+
+const password =process.env.PASSWORD;
+
+export async function getStaticProps() {
+  // fetch data from an API
+  const client = await MongoClient.connect(`mongodb+srv://manojmathew:${password}@cluster0.sr0evq9.mongodb.net/events?retryWrites=true&w=majority`);
+  const db= client.db();
+
+  const eventsCollection= db.collection('events');
+  const events= await eventsCollection.find().toArray();
+
+
+  client.close();
+  return {
+    props: {
+      events: events.map((event) => ({
+        title: event.title,
+        address: event.address,
+        image: event.image,
+        id: event._id.toString(),
+      })),
+    },
+    revalidate: 1,
+  };
+}; 
 
 export default HomePage;
