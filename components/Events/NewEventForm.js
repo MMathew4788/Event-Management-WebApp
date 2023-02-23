@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import {useRef } from 'react';
 
 import Card from '../UI/Card';
 
 function NewEventForm(props) {
+ 
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const addressInputRef = useRef();
   const descriptionInputRef = useRef();
+  const passcodeInputRef = useRef();
 
   function submitHandler(event) {
     event.preventDefault();
@@ -15,15 +17,22 @@ function NewEventForm(props) {
     const enteredImage = imageInputRef.current.value;
     const enteredAddress = addressInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
+    const enteredCode = passcodeInputRef.current.value;
 
-    const eventData = {
+  
+    if (enteredCode === "ABC1234") {
+      const eventData = {
       title: enteredTitle,
       image: enteredImage,
       address: enteredAddress,
       description: enteredDescription,
-    };
+      };
 
-    props.onAddEvent(eventData);
+    props.onAddEvent(eventData);}
+    else{
+      alert("Incorrect password. Please try again.");
+    }
+
   }
 
   return (
@@ -51,9 +60,15 @@ function NewEventForm(props) {
             placeholder='Enter the description of event'
           ></textarea>
         </div>
-        <div>
-          <button className="rounded-xl bg-[#f18973] hover:bg-[#bc5a45] px-4 py-2 font-bold">Add Event</button>
+        <div className="p-2 space-y-2 flex flex-col">
+          <label className='font-semibold'>Passcode</label>
+          <input type='password' required id='password' ref={passcodeInputRef} placeholder='Enter the passcode and Add Event'/>
         </div>
+        
+        <div>
+          <button className="mt-2 rounded-xl bg-[#f18973] hover:bg-[#bc5a45] px-4 py-2 font-bold">Add Event</button>
+        </div>
+        
       </form>
     </Card>
   );
