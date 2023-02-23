@@ -4,7 +4,7 @@ function Layout(props) {
   return (
     <div>
       <MainNavigation />
-      <main className='mx-auto my-12 w-10/12 max-w-2xl'>{props.children}</main>
+      <main className='mt-28 md:mt-20 mx-auto w-10/12'>{props.children}</main>
     </div>
   );
 }

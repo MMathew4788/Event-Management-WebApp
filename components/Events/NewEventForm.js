@@ -31,15 +31,15 @@ function NewEventForm(props) {
       <form className="p-4" onSubmit={submitHandler}>
         <div className="p-2 space-y-2 flex flex-col">
           <label htmlFor='title' className='font-semibold'>Event Title</label>
-          <input type='text' required id='title' ref={titleInputRef} />
+          <input type='text' required id='title' ref={titleInputRef} placeholder='Enter the title of event'/>
         </div>
         <div className="p-2 space-y-2 flex flex-col">
           <label htmlFor='image' className='font-semibold'>Event Image</label>
-          <input type='url' required id='image' ref={imageInputRef} />
+          <input type='url' required id='image' ref={imageInputRef} placeholder='Enter the url of event image' />
         </div>
         <div className="p-2 space-y-2 flex flex-col">
           <label htmlFor='address' className='font-semibold'>Address</label>
-          <input type='text' required id='address' ref={addressInputRef} />
+          <input type='text' required id='address' ref={addressInputRef} placeholder='Enter the address of event'/>
         </div>
         <div className="p-2 space-y-2 flex flex-col">
           <label htmlFor='description' className='font-semibold text-justify'>Description</label>
@@ -48,10 +48,11 @@ function NewEventForm(props) {
             required
             rows='5'
             ref={descriptionInputRef}
+            placeholder='Enter the description of event'
           ></textarea>
         </div>
         <div>
-          <button className="rounded-xl bg-[#f18973] hover:bg-[#bc5a45] px-4 py-2">Add Event</button>
+          <button className="rounded-xl bg-[#f18973] hover:bg-[#bc5a45] px-4 py-2 font-bold">Add Event</button>
         </div>
       </form>
     </Card>

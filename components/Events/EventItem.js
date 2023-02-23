@@ -15,8 +15,8 @@ function EventItem(props) {
           <img src={props.image} alt={props.title} className="object-fit" />
         </div>
         <div className="p-2 text-center">
-          <h3>{props.title}</h3>
-          <address>{props.address}</address>
+          <h3 className="font-bold">{props.title}</h3>
+          <h3>{props.address}</h3>
         </div>
         <div className="text-center">
           <button
