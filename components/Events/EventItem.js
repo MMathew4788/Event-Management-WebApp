@@ -11,7 +11,7 @@ function EventItem(props) {
   return (
     <li>
       <Card>
-        <div className="w-full h-full overflow-hidden mx-auto rounded-t-xl">
+        <div className="w-full h-full overflow-hidden mx-auto rounded-t-xl cursor-pointer" onClick={showDetailHandler}>
           <img src={props.image} alt={props.title} className="object-fit" />
         </div>
         <div className="p-2 text-center">
